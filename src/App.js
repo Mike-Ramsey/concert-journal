@@ -5,6 +5,7 @@ import ConcertForm from './components/ConcertForm';
 import Concerts from './components/Concerts';
 import UpdateConcert from './components/UpdateConcert';
 import './App.css';
+import background from './background.png';
 
 export default function App() {
   const [concerts, setConcerts] = useState('');
@@ -14,6 +15,10 @@ export default function App() {
   const [notes, setNotes] = useState('');
   const [concertForm, setConcertForm] = useState('hideForm');
   const [addButton, setAddButton] = useState('showButton')
+  
+  useEffect(() => {
+    refreshConcerts();
+  }, [])
   
   const changeStyle = () => {
     setConcertForm('showForm');
@@ -28,30 +33,12 @@ export default function App() {
     const freshConcerts = await getConcerts();
     setConcerts((freshConcerts) ? freshConcerts : []);   
   };
-  useEffect(() => {
-    refreshConcerts();
-  }, [])
 
 
   return (
     <div className='main'>
       <h1 className='main-header'>Concert Journal</h1>
       <br/>
-
-      <div>
-        <UpdateConcert />
-      </div>
-      <br/>
-      <br/>
-      {/* <div>
-        <UpdateConcert />
-      </div> */}
-      <div>
-        <Concerts />
-      </div>
-      <div className={addButton}>
-      <Button onClick={changeStyle} >Add a New Concert</Button>
-      </div>
       <div  className={concertForm}>
         <ConcertForm 
           artist={artist}
@@ -64,6 +51,30 @@ export default function App() {
           setNotes={setNotes}
           addConcert={addConcert}
           />
+      </div>
+      {/* <div>
+        <UpdateConcert />
+      </div> */}
+      <br/>
+      <br/>
+      {/* <div>
+        <UpdateConcert />
+      </div> */}
+      <div>
+        <Concerts 
+          artist={artist}
+          setArtist={setArtist}          
+          date={date}
+          setDate={setDate}
+          venue={venue}
+          setVenue={setVenue}
+          notes={notes}
+          setNotes={setNotes}
+          addConcert={addConcert}
+        />
+      </div>
+      <div className={addButton}>
+      <Button onClick={changeStyle} >Add a New Concert</Button>
       </div>
     </div>
   )
