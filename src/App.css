@@ -52,9 +52,20 @@
   font-family: 'Caveat', sans-serif;
 } */
 
-.create-form{
+.showForm{
   font-family: 'Caveat', sans-serif;
   font-size: 18px;
   /* display: none; */
 }
 
+.hideForm{
+  display: none;
+}
+
+.showButton{
+
+}
+
+.hideButton{
+  display: none;
+}

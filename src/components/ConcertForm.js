@@ -20,7 +20,7 @@ export default function ConcertForm() {
 
   const addConcert = () => {
     createConcert({date, artist, venue, notes});
-    refreshConcerts();
+    // window.location.reload(false);
   }
 
   return (

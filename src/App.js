@@ -8,11 +8,18 @@ import './App.css';
 
 export default function App() {
 
+  const [concertForm, setConcertForm] = useState('hideForm');
+  const [addButton, setAddButton] = useState('showButton')
+  const changeStyle = () => {
+    setConcertForm('showForm');
+    setAddButton('hideButton');
+  }
+
   return (
     <div className='main'>
       <h1 className='main-header'>Concert Journal</h1>
       <br/>
-      <div  className='create-form'>
+      <div  className={concertForm}>
         <ConcertForm />
       </div>
       <br/>
@@ -23,7 +30,9 @@ export default function App() {
       <div>
         <Concerts />
       </div>
-      <Button>Add a New Concert</Button>
+      <div className={addButton}>
+      <Button onClick={changeStyle} >Add a New Concert</Button>
+      </div>
     </div>
   )
 }
