@@ -44,15 +44,17 @@
   justify-content: start;
   align-items: center;
   height: 100vh;
-  flex-direction: column
-}
-
-.main-header{
+  flex-direction: column;
   font-family: 'Caveat', sans-serif;
 }
+
+/* .main-header{
+  font-family: 'Caveat', sans-serif;
+} */
 
 .create-form{
   font-family: 'Caveat', sans-serif;
   font-size: 18px;
+  /* display: none; */
 }
 
