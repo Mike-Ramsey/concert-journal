@@ -69,3 +69,7 @@
 .hideButton{
   display: none;
 }
+
+.updateForm{
+  display: none;
+}

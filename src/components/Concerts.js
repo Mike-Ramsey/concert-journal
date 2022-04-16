@@ -46,8 +46,8 @@ export default function Concerts() {
                 <td key={`artist-${data.id}`}>{data.artist}</td>
                 <td key={`venue-${data.id}`}>{data.venue}</td>
                 <td key={`notes-${data.id}`}>{data.notes}</td>
+                <td><Button variant='success' size='sm' onClick={() => handleUpdate(data)}>Edit</Button></td>
                 <td><Button variant='danger' size='sm' onClick={() => handleDelete(data)}>Delete</Button></td>
-                <td><Button variant='success' size='sm' onClick={() => handleUpdate(data)}>Update</Button></td>
               </tr>
             )
           })}

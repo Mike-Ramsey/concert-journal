@@ -3,25 +3,24 @@ import { Form, Button } from 'react-bootstrap';
 import { createConcert, getConcerts } from '../services/ConcertService';
 
 
-export default function ConcertForm() {
-  const [concerts, setConcerts] = useState('');
-  const [artist, setArtist] = useState('');
-  const [date, setDate] = useState('');
-  const [venue, setVenue] = useState('');
-  const [notes, setNotes] = useState('');
+export default function ConcertForm({ artist, setArtist, date, setDate, venue, setVenue, notes, setNotes, addConcert }) {
+  // const [concerts, setConcerts] = useState('');
+  // const [artist, setArtist] = useState('');
+  // const [date, setDate] = useState('');
+  // const [venue, setVenue] = useState('');
+  // const [notes, setNotes] = useState('');
 
-  const refreshConcerts = async () => {
-    const freshConcerts = await getConcerts();
-    setConcerts((freshConcerts) ? freshConcerts : []);   
-  };
-  useEffect(() => {
-    refreshConcerts();
-  }, [])
+  // const refreshConcerts = async () => {
+  //   const freshConcerts = await getConcerts();
+  //   setConcerts((freshConcerts) ? freshConcerts : []);   
+  // };
+  // useEffect(() => {
+  //   refreshConcerts();
+  // }, [])
 
-  const addConcert = () => {
-    createConcert({date, artist, venue, notes});
-    // window.location.reload(false);
-  }
+  // const addConcert = () => {
+  //   createConcert({date, artist, venue, notes});
+  // }
 
   return (
     <div>
