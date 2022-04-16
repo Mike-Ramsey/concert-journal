@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { deleteConcert, getConcerts, updateConcert } from '../services/ConcertService';
-import '../App.css';
+// import '../App.css';
 
 export default function Concerts({ artist, setArtist, date, setDate, venue, setVenue, notes, setNotes, addConcert }) {
   const [updateForm, setUpdateForm] = useState('hideUpdateForm');
   const [concertData, setConcertData] = useState([]);
   const [editData, setEditData] = useState([]);
+  const [editDate, setEditDate] = useState('');
+  const [editArtist, setEditArtist] = useState('');
+  const [editVenue, setEditVenue] = useState('');
+  const [editNotes, setEditNotes] = useState('');
   
   const refreshConcerts = async () => {
     const freshConcerts = await getConcerts();
@@ -14,7 +18,10 @@ export default function Concerts({ artist, setArtist, date, setDate, venue, setV
   };
   
   useEffect(() => {
-
+    setEditDate(localStorage.getItem('Date'))
+    setEditArtist(localStorage.getItem('Artist'))
+    setEditVenue(localStorage.getItem('Venue'))
+    setEditNotes(localStorage.getItem('Notes'))
   }, [])
 
   const handleDelete = async (concert) => {
@@ -36,10 +43,10 @@ export default function Concerts({ artist, setArtist, date, setDate, venue, setV
     changeStyle();
   }
 
-  const handleUpdate = async (concert) => {
-    await updateConcert(concert);
-    refreshConcerts();
-  }
+  // const handleUpdate = async (concert) => {
+  //   await updateConcert(concert);
+  //   refreshConcerts();
+  // }
 
   return (
     <>
@@ -47,19 +54,19 @@ export default function Concerts({ artist, setArtist, date, setDate, venue, setV
       <Form>
       <Form.Group>
           <Form.Label>Date </Form.Label>
-          <Form.Control type='date' value={date} onChange={(e) => setDate(e.target.value)}/>
+          <Form.Control type='date' value={editDate} onChange={(e) => setEditDate(e.target.value)}/>
         </Form.Group>        
         <Form.Group>
           <Form.Label>Artist </Form.Label>
-          <Form.Control type='text' value={artist} onChange={(e) => setArtist(e.target.value)} />
+          <Form.Control type='text' value={editArtist} onChange={(e) => setEditArtist(e.target.value)} />
         </Form.Group>       
         <Form.Group>
           <Form.Label>Venue </Form.Label>
-          <Form.Control type='text' value={venue} onChange={(e) => setVenue(e.target.value)}/>
+          <Form.Control type='text' value={editVenue} onChange={(e) => setEditVenue(e.target.value)}/>
         </Form.Group>       
         <Form.Group>
           <Form.Label>Notes </Form.Label>
-          <Form.Control as='textarea' value={notes} rows={3} onChange={(e) => setNotes(e.target.value)}/>
+          <Form.Control as='textarea' rows={3} value={editNotes} onChange={(e) => setEditNotes(e.target.value)}/>
         </Form.Group>
         <Button type='button'>Update</Button>
       </Form>

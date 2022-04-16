@@ -3,9 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import { getConcerts, createConcert, updateConcert, deleteConcert } from './services/ConcertService';
 import ConcertForm from './components/ConcertForm';
 import Concerts from './components/Concerts';
-import UpdateConcert from './components/UpdateConcert';
 import './App.css';
-import background from './background.png';
+
 
 export default function App() {
   const [concerts, setConcerts] = useState('');
@@ -52,14 +51,6 @@ export default function App() {
           addConcert={addConcert}
           />
       </div>
-      {/* <div>
-        <UpdateConcert />
-      </div> */}
-      <br/>
-      <br/>
-      {/* <div>
-        <UpdateConcert />
-      </div> */}
       <div>
         <Concerts 
           artist={artist}
