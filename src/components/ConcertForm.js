@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { createConcert, getConcerts } from '../services/ConcertService';
 
@@ -11,38 +10,19 @@ export default function ConcertForm() {
   const [venue, setVenue] = useState('');
   const [notes, setNotes] = useState('');
 
-
-  // const addConcert = () => {
-  //   axios.post('https://625a4d66cda73d132d1e5031.mockapi.io/concerts', {
-  //     artist, date, venue, notes });
-  //     setArtist(() => '');
-  //     setDate(() => '');
-  //     setVenue(() => '');
-  //     setNotes(() => '');
-  // }
-
-  // const concert = {
-  //   id: concert.id,
-  //   artist: concert.artist,
-  //   date: concert.date,
-  //   venue: concert.venue,
-  //   notes: concert.notes
-  // };
-
   const refreshConcerts = async () => {
-    const freshConcerts = await getConcerts();
-    setConcerts((freshConcerts) ? freshConcerts : []);
+    await getConcerts();
+    
   };
-  useEffect(() => {
-
-    refreshConcerts();
-  }, [])
-
 
   const addConcert = () => {
     createConcert({artist, date, venue, notes});
     refreshConcerts();
   }
+
+  useEffect(() => {
+    refreshConcerts();
+  }, [])
 
   return (
     <div>

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { deleteConcert, getConcerts } from '../services/ConcertService';
@@ -13,37 +12,14 @@ export default function Concerts() {
   };
   
   useEffect(() => {
-  // axios.get('https://625a4d66cda73d132d1e5031.mockapi.io/concerts')
-  //   .then((response) => {
-  //     setConcertData(response.data);
-  //   })
     refreshConcerts();
   }, [])
 
-  // const setData = (data) => {
-  //   let { artist, date, venue, notes } = data;
-  //   localStorage.setItem('Artist', artist);
-  //   localStorage.setItem('Date', date);
-  //   localStorage.setItem('Venue', venue);
-  //   localStorage.setItem('Notes', notes);
-  // }
-
   const handleDelete = async (concert) => {
-    // axios.delete(`https://625a4d66cda73d132d1e5031.mockapi.io/concerts/${id}`)
-    //   .then(() => {
-    //     getData();
-    //   })
     await deleteConcert(concert);
     refreshConcerts();
 
   }
-
-  // const getData = () => {
-  //   axios.get(`https://625a4d66cda73d132d1e5031.mockapi.io/concerts`)
-  //     .then((getData) => {
-  //       setConcertData(getData.data);
-  //     })
-  // }
 
   return (
     <div>
@@ -60,11 +36,11 @@ export default function Concerts() {
         <tbody>
           {concertData.map((data) => {
             return (
-              <tr>
-                <td>{data.artist}</td>
-                <td>{data.date}</td>
-                <td>{data.venue}</td>
-                <td>{data.notes}</td>
+              <tr key={data.id}>
+                <td key={`artist-${data.id}`}>{data.artist}</td>
+                <td key={`date-${data.id}`}>{data.date}</td>
+                <td key={`venue-${data.id}`}>{data.venue}</td>
+                <td key={`notes-${data.id}`}>{data.notes}</td>
                 <td><Button onClick={() => handleDelete(data)}>Delete</Button></td>
               </tr>
             )
