@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { deleteConcert, getConcerts, updateConcert } from '../services/ConcertService';
 import '../App.css';
 
-export default function Concerts({ refresh, artist, setArtist, date, setDate, venue, setVenue, notes, setNotes }) {
+export default function Concerts({ showAdd, hideAdd, refresh, artist, setArtist, date, setDate, venue, setVenue, notes, setNotes }) {
 
   const [concertData, setConcertData] = useState([]);
   // const [editData, setEditData] = useState([]);
@@ -25,6 +25,7 @@ export default function Concerts({ refresh, artist, setArtist, date, setDate, ve
 
   const changeStyle = () => {
     setUpdateForm('showUpdateForm');
+    hideAdd();
   }
 
   const setData = (data) => {

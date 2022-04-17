@@ -23,6 +23,7 @@ export default function App() {
     setConcertForm('showForm');
     setAddButton('hideButton');
   }
+
   const addConcert = () => {
     createConcert({date, artist, venue, notes});
   };
@@ -32,6 +33,13 @@ export default function App() {
     setConcerts((freshConcerts) ? freshConcerts : []);   
   };
 
+  const hideAddButton = () => {
+    setAddButton('hideButton');
+  }
+
+  const showAddButton = () => {
+    setAddButton('showButton')
+  }
 
   return (
     <>
@@ -50,6 +58,8 @@ export default function App() {
           setNotes={setNotes}
           addConcert={addConcert}
           refresh={refreshConcerts}
+          hideAdd={hideAddButton}
+          showAdd={showAddButton}
         />
       </div>
 
