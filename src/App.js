@@ -26,6 +26,8 @@ export default function App() {
 
   const addConcert = () => {
     createConcert({date, artist, venue, notes});
+    setConcertForm('hideForm');
+    setAddButton('showButton');
   };
 
   const refreshConcerts = async () => {
@@ -45,7 +47,22 @@ export default function App() {
     <>
     <div className='main'>
       <h1 className='main-header'>Concert Journal</h1>
-
+      <div className={addButton}>
+      <Button onClick={changeStyle} >Add a New Concert</Button>
+      </div>
+      <div className={concertForm}>
+        <ConcertForm
+          artist={artist}
+          setArtist={setArtist}
+          date={date}
+          setDate={setDate}
+          venue={venue}
+          setVenue={setVenue}
+          notes={notes}
+          setNotes={setNotes}
+          addConcert={addConcert} 
+        />
+      </div>
       <div>
         <Concerts 
           artist={artist}
@@ -62,25 +79,6 @@ export default function App() {
           showAdd={showAddButton}
         />
       </div>
-
-      <div className={addButton}>
-      <Button onClick={changeStyle} >Add a New Concert</Button>
-      </div>
-
-      <div className={concertForm}>
-        <ConcertForm
-          artist={artist}
-          setArtist={setArtist}
-          date={date}
-          setDate={setDate}
-          venue={venue}
-          setVenue={setVenue}
-          notes={notes}
-          setNotes={setNotes}
-          addConcert={addConcert} 
-        />
-      </div>
-
     </div>
     </>
   )

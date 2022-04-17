@@ -47,6 +47,7 @@ export default function Concerts({ showAdd, hideAdd  }) {
 
   const handleUpdate = async () => {
     await updateConcert();
+    setUpdateForm('hideUpdateForm');
     showAdd();
     refreshConcerts();
   }
