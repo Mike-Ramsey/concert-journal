@@ -3,8 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import { getConcerts, createConcert, updateConcert, deleteConcert } from './services/ConcertService';
 import ConcertForm from './components/ConcertForm';
 import Concerts from './components/Concerts';
-import UpdateConcert from './components/UpdateConcert';
 import './App.css';
+
 
 export default function App() {
   const [concerts, setConcerts] = useState('');
@@ -14,6 +14,10 @@ export default function App() {
   const [notes, setNotes] = useState('');
   const [concertForm, setConcertForm] = useState('hideForm');
   const [addButton, setAddButton] = useState('showButton')
+  
+  useEffect(() => {
+    refreshConcerts();
+  }, [])
   
   const changeStyle = () => {
     setConcertForm('showForm');
@@ -27,29 +31,15 @@ export default function App() {
     const freshConcerts = await getConcerts();
     setConcerts((freshConcerts) ? freshConcerts : []);   
   };
-  useEffect(() => {
-    refreshConcerts();
-  }, [])
 
 
   return (
+    <>
     <div className='main'>
       <h1 className='main-header'>Concert Journal</h1>
-      <br/>
 
       <div>
-        <UpdateConcert />
-      </div>
-      <div>
         <Concerts 
-          refresh={refreshConcerts}
-        />
-      </div>
-      <div className={addButton}>
-      <Button onClick={changeStyle} >Add a New Concert</Button>
-      </div>
-      <div  className={concertForm}>
-        <ConcertForm 
           artist={artist}
           setArtist={setArtist}          
           date={date}
@@ -59,8 +49,29 @@ export default function App() {
           notes={notes}
           setNotes={setNotes}
           addConcert={addConcert}
-          />
+          refresh={refreshConcerts}
+        />
       </div>
+
+      <div className={addButton}>
+      <Button onClick={changeStyle} >Add a New Concert</Button>
+      </div>
+
+      <div className={concertForm}>
+        <ConcertForm
+          artist={artist}
+          setArtist={setArtist}
+          date={date}
+          setDate={setDate}
+          venue={venue}
+          setVenue={setVenue}
+          notes={notes}
+          setNotes={setNotes}
+          addConcert={addConcert} 
+        />
+      </div>
+
     </div>
+    </>
   )
 }

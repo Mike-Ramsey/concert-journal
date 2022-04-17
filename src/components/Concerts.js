@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { deleteConcert, getConcerts, updateConcert } from '../services/ConcertService';
+import '../App.css';
 
-export default function Concerts({ refresh }) {
+export default function Concerts({ refresh, artist, setArtist, date, setDate, venue, setVenue, notes, setNotes }) {
 
   const [concertData, setConcertData] = useState([]);
+  // const [editData, setEditData] = useState([]);
+  const [updateForm, setUpdateForm] = useState('hideUpdateForm')
   
   const refreshConcerts = async () => {
     const freshConcerts = await getConcerts();
@@ -20,12 +23,27 @@ export default function Concerts({ refresh }) {
     refreshConcerts();
   }
 
+  const changeStyle = () => {
+    setUpdateForm('showUpdateForm');
+  }
+
+  const setData = (data) => {
+    console.log(data);
+    let { date, artist, venue, notes } = data;
+    localStorage.setItem('Date', date);
+    localStorage.setItem('Artist', artist);
+    localStorage.setItem('Venue', venue);
+    localStorage.setItem('Notes', notes);
+    changeStyle();
+  }
+
   const handleUpdate = async (concert) => {
     await updateConcert(concert);
     refreshConcerts();
   }
 
   return (
+    <>
     <div>
       <table className='table'>
         <thead>
@@ -46,7 +64,7 @@ export default function Concerts({ refresh }) {
                 <td key={`artist-${data.id}`}>{data.artist}</td>
                 <td key={`venue-${data.id}`}>{data.venue}</td>
                 <td key={`notes-${data.id}`}>{data.notes}</td>
-                <td><Button variant='success' size='sm' onClick={() => handleUpdate(data)}>Edit</Button></td>
+                <td><Button variant='success' size='sm' onClick={() => setData(data)}>Edit</Button></td>
                 <td><Button variant='danger' size='sm' onClick={() => handleDelete(data)}>Delete</Button></td>
               </tr>
             )
@@ -54,5 +72,27 @@ export default function Concerts({ refresh }) {
         </tbody>
       </table>
     </div>
+    <div className={updateForm}>
+      <Form>
+      <Form.Group>
+          <Form.Label>Date </Form.Label>
+          <Form.Control type='date' value={date} onChange={(e) => setDate(e.target.value)}/>
+        </Form.Group>        
+        <Form.Group>
+          <Form.Label>Artist </Form.Label>
+          <Form.Control type='text' value={artist} onChange={(e) => setArtist(e.target.value)} />
+        </Form.Group>       
+        <Form.Group>
+          <Form.Label>Venue </Form.Label>
+          <Form.Control type='text' value={venue} onChange={(e) => setVenue(e.target.value)}/>
+        </Form.Group>       
+        <Form.Group>
+          <Form.Label>Notes </Form.Label>
+          <Form.Control as='textarea' value={notes} rows={3} onChange={(e) => setNotes(e.target.value)}/>
+        </Form.Group>
+        <Button type='button'>Update</Button>
+      </Form>
+    </div>
+    </>
   )
 }

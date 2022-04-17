@@ -46,16 +46,12 @@
   height: 100vh;
   flex-direction: column;
   font-family: 'Caveat', sans-serif;
-}
 
-/* .main-header{
-  font-family: 'Caveat', sans-serif;
-} */
+}
 
 .showForm{
   font-family: 'Caveat', sans-serif;
   font-size: 18px;
-  /* display: none; */
 }
 
 .hideForm{
@@ -63,13 +59,16 @@
 }
 
 .showButton{
-
 }
 
 .hideButton{
   display: none;
 }
 
-.updateForm{
+.hideUpdateForm{
   display: none;
+}
+
+.showUpdateForm{
+  
 }
