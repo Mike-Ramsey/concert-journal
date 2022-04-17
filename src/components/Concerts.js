@@ -3,11 +3,14 @@ import { Button, Form } from 'react-bootstrap';
 import { deleteConcert, getConcerts, updateConcert } from '../services/ConcertService';
 import '../App.css';
 
-export default function Concerts({ showAdd, hideAdd, refresh, artist, setArtist, date, setDate, venue, setVenue, notes, setNotes }) {
+export default function Concerts({ showAdd, hideAdd  }) {
 
   const [concertData, setConcertData] = useState([]);
-  // const [editData, setEditData] = useState([]);
-  const [updateForm, setUpdateForm] = useState('hideUpdateForm')
+  const [updateForm, setUpdateForm] = useState('hideUpdateForm');
+  const [date, setDate] = useState('');
+  const [artist, setArtist] = useState('');
+  const [venue, setVenue] = useState('');
+  const [notes, setNotes] = useState('');
   
   const refreshConcerts = async () => {
     const freshConcerts = await getConcerts();
@@ -15,6 +18,10 @@ export default function Concerts({ showAdd, hideAdd, refresh, artist, setArtist,
   };
   
   useEffect(() => {
+    setDate(localStorage.getItem('Date'));
+    setArtist(localStorage.getItem('Artist'));
+    setVenue(localStorage.getItem('Venue'));
+    setNotes(localStorage.getItem('Notes'));
     refreshConcerts();
   }, [])
 
@@ -38,8 +45,9 @@ export default function Concerts({ showAdd, hideAdd, refresh, artist, setArtist,
     changeStyle();
   }
 
-  const handleUpdate = async (concert) => {
-    await updateConcert(concert);
+  const handleUpdate = async () => {
+    await updateConcert();
+    showAdd();
     refreshConcerts();
   }
 
@@ -91,7 +99,7 @@ export default function Concerts({ showAdd, hideAdd, refresh, artist, setArtist,
           <Form.Label>Notes </Form.Label>
           <Form.Control as='textarea' value={notes} rows={3} onChange={(e) => setNotes(e.target.value)}/>
         </Form.Group>
-        <Button type='button'>Update</Button>
+        <Button onClick={() => handleUpdate()} type='button'>Update</Button>
       </Form>
     </div>
     </>
