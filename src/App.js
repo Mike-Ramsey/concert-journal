@@ -21,8 +21,7 @@ export default function App() {
   }
   const addConcert = () => {
     createConcert({date, artist, venue, notes});
-    refreshConcerts();
-  }
+  };
 
   const refreshConcerts = async () => {
     const freshConcerts = await getConcerts();
@@ -41,13 +40,10 @@ export default function App() {
       <div>
         <UpdateConcert />
       </div>
-      <br/>
-      <br/>
-      {/* <div>
-        <UpdateConcert />
-      </div> */}
       <div>
-        <Concerts />
+        <Concerts 
+          refresh={refreshConcerts}
+        />
       </div>
       <div className={addButton}>
       <Button onClick={changeStyle} >Add a New Concert</Button>

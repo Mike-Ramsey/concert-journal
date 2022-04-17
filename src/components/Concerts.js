@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { deleteConcert, getConcerts, updateConcert } from '../services/ConcertService';
 
-export default function Concerts() {
+export default function Concerts({ refresh }) {
 
   const [concertData, setConcertData] = useState([]);
   
